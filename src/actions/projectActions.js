@@ -1,11 +1,14 @@
 import axios from "axios";
 import { GET_ERRORS, GET_PROJECTS } from "./types";
 
-export const createProject = (project, history) => async dispatch => {
+
+
+export const createProject = (project, history, navigate) => async dispatch => {
+
     try{
         const res = await axios.post("http://localhost:8080/api/project", project);
         console.log('hwl res', res);
-        // history.push("/dashboard");
+        navigate('/dashboard');
     } catch(err){
         console.log('hwl err', err);
         dispatch({
