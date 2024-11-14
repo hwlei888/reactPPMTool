@@ -10,7 +10,7 @@ function withNavigation(Component) {
       const navigate = useNavigate();
       return <Component {...props} navigate={ navigate } />;
     };
-  }
+};
 
 class AddProject extends Component {
     constructor() {
