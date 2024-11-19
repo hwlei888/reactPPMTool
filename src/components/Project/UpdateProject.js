@@ -143,7 +143,7 @@ const UpdateProjectWrapper = (props) => {
     const { id } = useParams();
     const navigate = useNavigate();
     return <UpdateProject {...props} id={id} navigate={ navigate } />;
-  };
+};
 
 UpdateProjectWrapper.propTypes = {
     getProject: PropTypes.func.isRequired,

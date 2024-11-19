@@ -5,13 +5,6 @@ import { createProject } from '../../actions/projectActions';
 import classnames from "classnames";
 import { useNavigate } from 'react-router-dom';
 
-function withNavigation(Component) {
-    return function (props) {
-      const navigate = useNavigate();
-      return <Component {...props} navigate={ navigate } />;
-    };
-};
-
 class AddProject extends Component {
     constructor() {
         super();
@@ -143,7 +136,12 @@ class AddProject extends Component {
     }
 }
 
-AddProject.propTypes = {
+const AddProjectWrapper = (props) => {
+    const navigate = useNavigate();
+    return <AddProject {...props} navigate={ navigate } />;
+};
+
+AddProjectWrapper.propTypes = {
     createProject: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired,
 };
@@ -152,9 +150,7 @@ const mapStateToProps = state => ({
     errors: state.errors
 });
 
-export default withNavigation(
-    connect(
-        mapStateToProps,
-        {createProject}
-    )(AddProject)
-);
+export default connect(
+    mapStateToProps,
+    {createProject}
+)(AddProjectWrapper);
