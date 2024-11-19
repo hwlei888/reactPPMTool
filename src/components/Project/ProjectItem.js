@@ -6,7 +6,6 @@ class ProjectItem extends Component {
   
   render() {
     const {project} = this.props;
-    console.log('hwl project', project.projectIdentifier);
     return (
         <div className="container">
         <div className="card card-body bg-light mb-3">

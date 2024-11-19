@@ -4,20 +4,16 @@ import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-function withNavigation(Component) {
-    return function (props) {
-      const navigate = useNavigate();
-      return <Component {...props} navigate={ navigate } />;
-    };
-};
+
 
 class UpdateProject extends Component {
     componentDidMount() {
-        const {id} = "";
-        // const {id} = this.props.match.params;
-        this.props.getProject(id, this.props.history, this.props.navigate);
+        const { id } = this.props;
+        this.props.getProject(id, this.props.navigate);
     }
+
     render() {
         return (
             <div className="project">
@@ -57,7 +53,13 @@ class UpdateProject extends Component {
     }
 }
 
-UpdateProject.propTypes = {
+const UpdateProjectWrapper = (props) => {
+    const { id } = useParams();
+    const navigate = useNavigate();
+    return <UpdateProject {...props} id={id} navigate={ navigate } />;
+  };
+
+UpdateProjectWrapper.propTypes = {
     getProject: PropTypes.func.isRequired,
     project: PropTypes.object.isRequired
 };
@@ -66,9 +68,8 @@ const mapStateToProps = state => ({
     project: state.project.project
 });
 
-export default withNavigation(
-    connect(
-        mapStateToProps,
-        {getProject}
-    )(UpdateProject)
-);
+export default connect(
+    mapStateToProps,
+    {getProject}
+)(UpdateProjectWrapper);
+

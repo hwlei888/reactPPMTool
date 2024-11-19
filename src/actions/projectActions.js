@@ -3,7 +3,7 @@ import { GET_ERRORS, GET_PROJECT, GET_PROJECTS } from "./types";
 
 
 
-export const createProject = (project, history, navigate) => async dispatch => {
+export const createProject = (project, navigate) => async dispatch => {
 
     try{
         const res = await axios.post("http://localhost:8080/api/project", project);
@@ -27,10 +27,8 @@ export const getProjects = () => async dispatch => {
     })
 }
 
-export const getProject = (id, history, navigate) => async dispatch => {
+export const getProject = (id, navigate) => async dispatch => {
     const res = await axios.get(`http://localhost:8080/api/project/${id}`);
-    console.log('hwl id', id);
-    console.log('hwl res', res);
     navigate(`/updateProject/${id}`);
     dispatch({
         type: GET_PROJECT,
