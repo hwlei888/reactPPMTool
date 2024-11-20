@@ -7,9 +7,13 @@ export const createProject = (project, navigate) => async dispatch => {
 
     try{
         const res = await axios.post("http://localhost:8080/api/project", project);
-        // history.push("/dashboard");
+        // history.push("/dashboard"); //not work now, need to use navigate
         // console.log('hwl res', res);
         navigate('/dashboard');
+        dispatch({
+            type: GET_ERRORS,
+            payload: {}
+        });
     } catch(err){
         // console.log('hwl err', err);
         dispatch({
@@ -28,12 +32,17 @@ export const getProjects = () => async dispatch => {
 }
 
 export const getProject = (id, navigate) => async dispatch => {
-    const res = await axios.get(`http://localhost:8080/api/project/${id}`);
-    navigate(`/updateProject/${id}`);
-    dispatch({
-        type: GET_PROJECT,
-        payload: res.data
-    })
+
+    try{
+        const res = await axios.get(`http://localhost:8080/api/project/${id}`);
+        navigate(`/updateProject/${id}`);
+        dispatch({
+            type: GET_PROJECT,
+            payload: res.data
+        })
+    } catch(error){
+        navigate('/dashboard');
+    }
 }
 
 
