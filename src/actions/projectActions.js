@@ -1,12 +1,11 @@
 import axios from "axios";
-import { GET_ERRORS, GET_PROJECT, GET_PROJECTS } from "./types";
+import { GET_ERRORS, GET_PROJECT, GET_PROJECTS, DELETE_PROJECT } from "./types";
 
 
 
 export const createProject = (project, navigate) => async dispatch => {
-
     try{
-        const res = await axios.post("http://localhost:8080/api/project", project);
+        const res = await axios.post("/api/project", project);
         // history.push("/dashboard"); //not work now, need to use navigate
         // console.log('hwl res', res);
         navigate('/dashboard');
@@ -24,17 +23,16 @@ export const createProject = (project, navigate) => async dispatch => {
 };
 
 export const getProjects = () => async dispatch => {
-    const res = await axios.get("http://localhost:8080/api/project/all");
+    const res = await axios.get("/api/project/all");
     dispatch({
         type: GET_PROJECTS,
         payload: res.data
     })
-}
+};
 
 export const getProject = (id, navigate) => async dispatch => {
-
     try{
-        const res = await axios.get(`http://localhost:8080/api/project/${id}`);
+        const res = await axios.get(`/api/project/${id}`);
         navigate(`/updateProject/${id}`);
         dispatch({
             type: GET_PROJECT,
@@ -43,7 +41,21 @@ export const getProject = (id, navigate) => async dispatch => {
     } catch(error){
         navigate('/dashboard');
     }
-}
+};
+
+export const deleteProject = (id, navigate) => async dispatch => {
+    if(
+        window.confirm(
+            "Are you sure? This will delete the project and all the data related to it"
+        )
+    ){
+        await axios.delete(`/api/project/${id}`);
+        dispatch({
+            type: DELETE_PROJECT,
+            payload: id
+        });
+    }
+};
 
 
 
