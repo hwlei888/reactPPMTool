@@ -1,8 +1,6 @@
 import axios from "axios";
 import { GET_ERRORS, GET_PROJECT, GET_PROJECTS, DELETE_PROJECT } from "./types";
 
-
-
 export const createProject = (project, navigate) => async dispatch => {
     try{
         await axios.post("/api/project", project);
