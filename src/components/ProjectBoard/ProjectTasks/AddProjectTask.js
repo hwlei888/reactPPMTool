@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import { addProjectTask } from '../../../actions/backlogActions';
 import PropTypes from "prop-types";
 
-
 class AddProjectTask extends Component {
     constructor(props){
         super(props);
@@ -23,7 +22,6 @@ class AddProjectTask extends Component {
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-
     }
 
     //when we transmit a bad form and there are errors in the state,
@@ -56,8 +54,6 @@ class AddProjectTask extends Component {
             newTask,
             this.props.navigate
         )
-
-        console.log('hwl newTask', newTask);
     }
 
     render() {
@@ -147,7 +143,6 @@ class AddProjectTask extends Component {
     }
 }
 
-
 const AddProjectTaskWrapper = (props) => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -163,6 +158,7 @@ const mapStateToProps = state => ({
     errors: state.errors
 })
 
-
-
-export default connect(mapStateToProps, {addProjectTask})(AddProjectTaskWrapper);
+export default connect(
+    mapStateToProps, 
+    {addProjectTask}
+)(AddProjectTaskWrapper);
