@@ -3,8 +3,7 @@ import { getProject, createProject } from '../../actions/projectActions';
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 class UpdateProject extends Component {
 
