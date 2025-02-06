@@ -47,10 +47,36 @@ export const getProjectTask = (
             type: GET_PROJECT_TASK,
             payload: res.data
         });
+        dispatch({
+            type: GET_ERRORS,
+            payload: {}
+        });
     }catch(err){
         navigate("/dashboard");
     }
 };
+
+export const updateProjectTask = (
+    backlog_id, 
+    pt_id, 
+    project_task, 
+    navigate,
+) => async dispatch => {
+    try{
+        await axios.patch(`/api/backlog/${backlog_id}/${pt_id}`, project_task);
+        navigate(`/projectBoard/${backlog_id}`);
+        dispatch({
+            type: GET_ERRORS,
+            payload: {}
+        });
+    }catch(err){
+        dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+        });
+    }
+    
+}
 
 
 
