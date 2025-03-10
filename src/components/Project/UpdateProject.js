@@ -169,8 +169,9 @@ const UpdateProjectWrapper = (props) => {
     return <UpdateProject {...props} id={id} navigate={ navigate } />;
 };
 
+// using PropTypes for type-checking props
 UpdateProjectWrapper.propTypes = {
-    getProject: PropTypes.func.isRequired,
+    getProject: PropTypes.func.isRequired, // Must be a function and is required
     createProject: PropTypes.func.isRequired,
     project: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired

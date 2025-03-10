@@ -16,7 +16,7 @@ class AddProject extends Component {
             start_date: "",
             end_date: "",
             errors: {},
-        }
+        };
     }
 
     //life cycle hooks
