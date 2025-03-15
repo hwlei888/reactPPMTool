@@ -140,7 +140,7 @@ const RegisterWrapper = props => {
     return <Register {...props} navigate={navigate} />;
 };
 
-Register.propTypes = {
+RegisterWrapper.propTypes = {
     createNewUser: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired
 }
